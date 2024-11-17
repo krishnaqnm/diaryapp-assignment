@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="logod.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+
+
+
+    <title>home</title>
+</head>
+
+<body>
+    <div class="hero">
+        <video autoplay muted playsinline class="bgvideo" id="backgroundVideo">
+            <source src="firstbg.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="container" id="inputContainer" style="display: none;">
+        <div class="hey">
+            <div class="date-display" id="dateDisplay"></div>
+
+            <input type="date" id="datepicker" onchange="updateDateDisplay()">
+            <h1>Today's diary</h1>
+        </div>
+        <textarea class="diary-input" id="diaryEntry"
+            placeholder="share me everything you got..."></textarea>
+        <div class="button">
+            <button type="submit" id="submit">preserve & cherish</button>
+        </div>
+    </div>
+
+    <video id="animation" src="endcard.mp4" style="display: none;"></video>
+
+    <script src="script_home.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_Yhtu3KYySrnTQG-YQMZBcbUsHfv09Vs",
+            authDomain: "personal-1d1d8.firebaseapp.com",
+            databaseURL: "https://personal-1d1d8-default-rtdb.firebaseio.com",
+            projectId: "personal-1d1d8",
+            storageBucket: "personal-1d1d8.appspot.com",
+            messagingSenderId: "593455297142",
+            appId: "1:593455297142:web:7bd82322917505af26a557"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+
+        const db = getDatabase(app);
+
+        document.getElementById("submit").addEventListener('click', function (e) {
+            e.preventDefault();
+
+            set(ref(db, 'Diarycontent/' + document.getElementById("datepicker").value), {
+                date: document.getElementById("datepicker").value,
+                content: document.getElementById("diaryEntry").value,
+            });
+
+            document.getElementById("inputContainer").style.display = "none";
+            document.getElementById("animation").style.display = "block";
+
+            playVideoAndRedirect();
+            
+        });
+
+
+        function playVideoAndRedirect() {
+            var video = document.getElementById('animation');
+
+            video.play();
+
+            video.onended = function () {
+                window.location.href = 'index.html';
+            };
+        }
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pages of Me</title>
+  <link rel="icon" type="image/png" href="logod.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hero">
+
+    <video autoplay loop muted plays-inline class="bgvideo">
+      <source src="diarybg.mp4" type="video/mp4">
+    </video>
+
+  
+    <div class="content">
+      <h1>Pages of life, penned with heart❤️</h1>
+      <button id="openDiary">write diary</button>
+      <button id="previousDiary">open diary</button>
+      <button id="allEntriesBtn">All entries</button>
+
+    </div>
+    
+  </div>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("allEntriesBtn").addEventListener("click", function() {
+        window.location.href = "entries.html"; // Redirect to entries.html on button click
+    });
+</script>
+</body>
+</html>
